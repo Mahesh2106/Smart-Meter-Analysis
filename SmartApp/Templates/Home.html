@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with Dorang landing page.">
+    <meta name="author" content="Devcrud">
+    <title>Smart Meter Ananlysis</title>
+    <!-- font icons -->
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/themify-icons/css/themify-icons.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Bootstrap + Dorang main styles -->
+	<link rel="stylesheet" href="{% static 'assets/css/dorang.css' %}">
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home" class="dark-theme">
+
+    <!-- page navbar -->
+    <nav class="page-navbar" data-spy="affix" data-offset-top="10">
+        <ul class="nav-navbar container">
+            <li class="nav-item"><a href="{% url 'Home' %}" class="nav-link">Home</a></li>
+            {% if request.session.Email %}
+            <li class="nav-item"><a href="{% url 'Logout_fn' %}" class="nav-link">Logout</a></li>
+            {% else %}
+            <li class="nav-item"><a href="{% url 'Register_Page' %}" class="nav-link">Register</a></li>
+            {% endif %}
+            <li class="nav-item"><a href="{% url 'Home' %}" class="nav-link"><img src="{% static 'assets/imgs/placeholder.svg' %}" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, weber Landing page"></a></li>
+
+        </ul>
+    </nav><!-- end of page navbar -->
+
+    <!-- page header -->
+    <header class="header">
+        <div class="overlay"></div>
+        <div class="header-content">
+            <h1 class="header-title">What Happens Tomorrow?</h1>
+            <p class="header-subtitle">Smart meters will incorporate artificial intelligence (AI) in the future,
+                making them even more intelligent and efficient. With AI, smart meters could learn your energy usage habits
+                and adjust your energy usage accordingly, further reducing your energy bills.</p>
+            {% if request.session.Email %}
+            <form action="{% url 'Register_Page'  %}">
+                 <button type="submit" class="btn btn-theme-color modal-toggle">Register</button>
+            </form>
+            {% else %}
+            <h2 class="header-title">Explore More</h2>
+            {% endif %}
+        </div>
+    </header><!-- end of page header -->
+
+    <!-- page container -->
+    <div class="container page-container">
+        <div class="col-md-10 col-lg-8 m-auto">
+            <h6 class="title mb-4">Explore Era Of Artificial Intelligence</h6>
+            <p class="mb-5">Smart meters cover gas, water, and electricity. It helps to take readings of gas and electricity,
+                send them to the suppliers, and show off the amount of gas and electricity used by the device installed in your home
+                or office and how you can reduce your energy bill. The use of Smart meters helps reduce your bills.</p>
+        </div>
+
+        <!-- row -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <a href="javascript:void(0)" class="overlay-img">
+                    <img src="{% static 'assets/imgs/electricity.jpg' %}" alt="" height="350px">
+                    <div class="overlay"></div>
+                    <div class="des">
+                        <h1 class="title">Smart Meter Ananlysis</h1>
+                        <h6 class="subtitle">Electrtricity</h6>
+                        <p>Smart meters provide a way of measuring electricity consumption in near real-time.
+                            This allows utility companies to charge different prices for consumption according to the time of day and the season.
+                            It also facilitates more accurate cash-flow models for utilities.</p>
+
+                    </div>
+                </a>
+                <form action="{% url 'Electricity_forecasting' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input class="btn btn-outline-danger" style="margin-left:40px;width:250px;" type="file" name="file" value="Insert Electricity Bills" accept=".text/csv"><br><br>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-outline-warning">Submit<i class="ti-angle-double-right angle"></i></button>
+                    </form>
+            </div>
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" >Predicted Electricity Amount</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <h1> Expected Electricity Amount is {{ x }}</h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+            <div class="col-md-4">
+                <a href="javascript:void(0)" class="overlay-img">
+                    <img src="{% static 'assets/imgs/water.jpg' %}" alt="" height="350px">
+                    <div class="overlay"></div>
+                    <div class="des">
+                        <h1 class="title">Smart Meter Ananlysis</h1>
+                        <h6 class="subtitle">Water</h6>
+                        <p>Smart water meters allow you to automatically track the amount of water you use.
+                            They also allow us to find and fix leaks more quickly.
+                            We're fitting compulsory water meters for all customers to help save water.</p>
+
+                    </div>
+                </a>
+                <form action="{% url 'Water_forecasting' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input class="btn btn-outline-danger" style="margin-left:40px;width:250px;" type="file" name="file" value="Insert Electricity Bills" accept=".text/csv"><br><br>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-outline-warning">Submit<i class="ti-angle-double-right angle"></i></button>
+                    </form>
+            </div>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" >Predicted Water Amount</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h1>Expected Water Amount is {{ x }}</h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+            <div class="col-md-4">
+                <a href="javascript:void(0)" class="overlay-img">
+                    <img src="{% static 'assets/imgs/gas.jpg' %}" alt="" height="350px">
+                    <div class="overlay"></div>
+                    <div class="des">
+                        <h1 class="title">Smart Meter Ananlysis</h1>
+                        <h6 class="subtitle">Gas</h6>
+                        <p>A smart meter is an electric meter and/or natural gas meter module
+                            with two-way communications between the meter and our systems.
+                            The smart meter transmits usage and meter status information to us.</p>
+                    </div>
+                </a>
+                <form action="{% url 'gas_forecasting' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input class="btn btn-outline-danger" style="margin-left:40px;width:250px;" type="file" name="file" value="Insert Electricity Bills" accept=".text/csv"><br><br>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal1" class="btn btn-outline-warning">Submit<i class="ti-angle-double-right angle"></i></button>
+                    </form>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1>Predicted Gas Amount</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h1>Expected Gas Amount is {{ x }}</h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+        <div class="col-md-10 col-lg-8 m-auto">
+            <h2 class="title mb-4 mt-5 pt-5">The Journal</h2>
+
+            <p class="mb-5">No more inaccurate bills: A smart meter design helps to know how much you have used electricity and gas and how much is remaining. It will display the days left based on the daily use of electricity and gas. In other words, if you have a non-smart meter, then based on the use of electricity and gas in the past, Suppliers issue bills that can be inaccurate. With the help of a Smart meter, false billing gets stopped, and you know how to limit your use of electricity and gas.
+
+By Smart meters, more data will come out that can help the suppliers to know about the supplies of energy customers build and make a profit. For example, if the energy bill exceeds suddenly at night will mean some fault or applications were running at night.
+
+Benchmarking analysis is another way to know your competitors in the same field.
+
+Altogether Smart meters are necessary options to be taken to reduce CO2 emissions into the atmosphere.
+
+With the help of the SMILE project in the United Kingdom, the energy usage by a Smart meter in care-taking homes or patients will let us know when the person uses which day electricity more, leading to the observation of health in the disabled and elderly.
+
+Smart meters will let us know when the person uses which day electricity more, which will detect health issues in the disabled and elderly.</p>
+        </div>
+
+        <!-- row -->
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <a href="javascript:void(0)" class="card">
+                    <img src="{% static 'assets/imgs/money.webp' %}" height="350px" class="card-img" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, weber Landing page">
+                    <div class="card-body">
+<!--                        <h6 class="card-subtitle">30 June, 2018</h6>-->
+                        <h3 class="card-title">Money Management</h3>
+                        <p>Most people talk about earning more money, however, not many people talk about how to effectively manage it.
+                            While creating wealth is essential, it is equally important to protect your funds and use them prudently.
+                            Your hard-earned money needs to be saved, invested, and spent judiciously in a systematic manner in order to ensure long-term stability and liquidity.
+                            This can be done through effective money management</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="javascript:void(0)" class="card">
+                    <img src="{% static 'assets/imgs/happylife.jpg' %}" height="350px" class="card-img" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, weber Landing page">
+                    <div class="card-body">
+                        <h3 class="card-title">Pursuing Happy Life</h3>
+                        <p>Money is one of the most important necessities in life.
+                            You cannot imagine a single day of your life without money. It is so important that its lack can leave you immensely worried and expose you to financial stress.
+                            Financial stress is defined as a condition that results from certain financial and economic events that cause anxiety, worry,
+                            and a sense of scarcity and is accompanied by the physiological stress response. </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="contact-section">
+        <div class="overlay"></div>
+        <!-- container -->
+        <div class="container">
+            <div class="col-md-10 col-lg-8 m-auto">
+                <h6 class="title mb-2">Road To Stress Free Life </h6>
+
+            </div>
+
+            <!-- footer -->
+            <footer class="footer">
+                <p class="infos">&copy; <script>document.write(new Date().getFullYear())</script>, Made with <i class="ti-heart text-danger"></i> </p>
+                <span>|</span>
+                <div class="links">
+                    <a href="{% url 'Home' %}">
+                        Home
+                    </a>
+                    <a href="{% url 'Logout_fn' %}">Logout</a>
+
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- core  -->
+    <script src="{% static 'assets/vendors/jquery/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'assets/vendors/bootstrap/bootstrap.bundle.js' %}"></script>
+
+    <!-- bootstrap affix -->
+    <script src="{% static 'assets/vendors/bootstrap/bootstrap.affix.js' %}"></script>
+
+    <!-- Dorang js -->
+    <script src="{% static 'assets/js/dorang.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ {% if messages %}
+        {% for i in messages %}
+            {% if i.tags == 'warning' %}
+                <script>
+                    swal('{{i}}','', 'warning');
+                </script>
+            {% elif i.tags == 'error' %}
+                <script>
+                    swal('{{i}}','', 'error');
+                </script>
+            {% else %}
+                <script>
+                    swal('{{i}}','', 'success');
+                </script>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
